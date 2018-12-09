@@ -1,44 +1,23 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, InputGroupAddon, InputGroup,  Input} from 'reactstrap';
 
 
 
 
-const Formulario = ({nodes, incluir}) => {
+const Formulario = ({carregar, resetar}) => {
     return (
         <div>
-            <Form onSubmit={incluir}>
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Label for="label">Label: </Label>
-                    <Input type="text" name="label" id="label" placeholder="Nome do nó" />
-                </FormGroup>
+            <Form onSubmit={carregar}>
+            
+            <hr/>
+            <h3 className="text-muted">Por favor, insira o recurso que deseja visualizar:</h3>
 
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Label for="color">Cor: </Label>
-                    <input type="color" id="head" name="color"  />
-                </FormGroup>
-                
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Label for="point_to">Aponta para: </Label>
-                    <Input type="select" name="point_to" id="point_to" multiple>
-                        <option value='0'>Nenhum</option>
-                        {nodes.map((value,index)=>(
-                            <option key={index} value={value.id}    >{value.label}</option>
-                        ))}
-                    </Input>
-                </FormGroup>
-                
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Label for="pointed_by">É apontodo por: </Label>
-                    <Input type="select" name="pointed_by" id="pointed_by" multiple>
-                        <option value='0'>Nenhum</option>
-                        {nodes.map((value,index)=>(
-                            <option key={index} value={value.id}>{value.label}</option>
-                        ))}
-                    </Input>
-                </FormGroup>
+             <InputGroup>
+                <InputGroupAddon addonType="prepend">http://dbpedia.org/resource/</InputGroupAddon>
+                    <Input placeholder="Sujeito" name='sujeito' defaultValue="Disownment"/>
+                <InputGroupAddon addonType="append"><Button color="primary">Carregar</Button><Button color="secondary" onClick={resetar}>Limpar</Button></InputGroupAddon>
+            </InputGroup>
 
-                <Button color='primary'>Adicionar</Button>
             </Form>
         </div>
     );
